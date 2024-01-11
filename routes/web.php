@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\WeatherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,33 @@ Route::get(
     '/erase-training/{id}',
     [TrainingController::class, 'erase']
 )->name('training.erase');
+
+Route::get(
+    '/home',
+    function () {
+        return view('dashboard');
+    }
+)->name('dashboard');
+
+Route::post(
+    '/weather',
+    [
+        WeatherController::class, 'index'
+    ]
+)->name('weather.index');
+
+
+Route::get('/city_search', function () {
+    return view('weather.city_search');
+})->name('weather.city_search');
+
+Route::post(
+    '/city_list',
+    [
+        WeatherController::class, 'search'
+    ]
+)->name('weather.city_list');
+
+Route::get('/main', function () {
+    return view('layouts.main');
+});

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeatherController;
 
 /*
@@ -34,8 +35,8 @@ Route::post(                /* post pour enregistrer des données */
     [TrainingController::class, 'store']
 )->name('training.store');
 
-/*   1 url (edit-trainée) nommée training.edit, 1 méthode edit, un contrôleur */
-Route::get(                    /*    pour ouvrir la page contenant le formulaire qui va modifier l'item */
+/*   1 url (edit-training) nommée training.edit, 1 méthode edit, un contrôleur */
+Route::get(    /*    pour ouvrir la page contenant le formulaire qui va modifier l'item */
     '/edit-training/{id}',
     [TrainingController::class, 'edit']
 )->name('training.edit');
@@ -56,6 +57,10 @@ Route::get(
         return view('dashboard');
     }
 )->name('dashboard');
+
+/*
+mercredi 10 janv 24
+*/
 
 Route::post(
     '/weather',
@@ -79,3 +84,33 @@ Route::post(
 Route::get('/main', function () {
     return view('layouts.main');
 });
+
+
+/*
+jeudi 11 janv 24
+*/
+
+Route::get(
+    '/liste_u',
+    [
+        UserController::class, 'list_all'
+    ]
+)->name('lister_les_utilisateurs');
+
+Route::get('/image_ajout/{id}',    [
+    UserController::class, 'displayForm'
+])->name('ajout_dune_image');
+
+Route::get(
+    '/liste_u',
+    [
+        UserController::class, 'list_all'
+    ]
+)->name('lister_les_utilisateurs');
+
+Route::post(
+    '/compresser_im',
+    [
+        UserController::class, 'storeImage'
+    ]
+)->name('compresser_image');

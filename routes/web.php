@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ScheduleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\UserController;
@@ -92,25 +93,54 @@ jeudi 11 janv 24
 
 Route::get(
     '/liste_u',
-    [
-        UserController::class, 'list_all'
-    ]
+    [UserController::class, 'list_all']
 )->name('lister_les_utilisateurs');
 
-Route::get('/image_ajout/{id}',    [
-    UserController::class, 'displayForm'
-])->name('ajout_dune_image');
+Route::get(
+    '/image_ajout/{id}',
+    [UserController::class, 'displayForm']
+)->name('ajout_dune_image');
 
 Route::get(
     '/liste_u',
-    [
-        UserController::class, 'list_all'
-    ]
+    [UserController::class, 'list_all']
 )->name('lister_les_utilisateurs');
 
 Route::post(
     '/compresser_im',
-    [
-        UserController::class, 'storeImage'
-    ]
+    [UserController::class, 'storeImage']
 )->name('compresser_image');
+
+/*
+vendredi 12 janv 24
+*/
+
+Route::get(
+    '/liste_des_creneaux',
+    [ScheduleController::class, 'index']
+)->name('lister_les_creneaux');
+
+Route::get(
+    '/modification_dun_creneau/{id}',
+    [ScheduleController::class, 'edit']
+)->name('modifier_un_creneau');
+
+Route::post(
+    '/mise_a_jour_dun_creneau/{id}',
+    [ScheduleController::class, 'update']
+)->name('mettre_a_jour_un_creneau_modifie');
+
+Route::get(
+    '/suppression_dun_creneau/{id}',
+    [ScheduleController::class, 'destroy']
+)->name('supprimer_un_creneau');
+
+Route::get(
+    '/creation_dun_creneau',
+    [ScheduleController::class, 'create']
+)->name('creer_un_creneau');
+
+Route::post(
+    '/enregistrement_dun_creneau',
+    [ScheduleController::class, 'store']
+)->name('enregistrer_un_creneau');
